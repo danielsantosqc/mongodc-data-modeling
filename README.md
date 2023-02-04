@@ -1,2 +1,2 @@
 # mongodb-data-modeling
-modelamiento de datos con mongodb, usando docker
+modelado de datos con mongodb, usando docker como contenedor para correr MongoDb 

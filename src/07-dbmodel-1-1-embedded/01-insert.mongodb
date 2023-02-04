@@ -1,0 +1,20 @@
+use("platzi_store")
+
+db .users.insertOne({
+  email:"gato@.con",
+  password: 'password000',
+  role:'customer',
+  social_accounts: ['twitter'],
+  address: {
+    street: 'cc 123',
+    city: 'Cali',
+    zip: '1122'
+  },
+  shipping_adres:{
+    street: 'cc 2342',
+    city: 'Cali',
+    zip: '123'
+  }
+})
+
+db.users.find()

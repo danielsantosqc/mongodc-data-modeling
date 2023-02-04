@@ -1,0 +1,88 @@
+use("platzi_store")
+
+// db.users.find()
+// db.orders.find()
+
+// db.orders.find({user_id: ObjectId('63dc487e68e0070144d806c3')})
+
+// obtiene todas las ordenes
+// db.orders.aggregate([
+//   {
+//     $lookup: {
+//       from: 'users',
+//       localField: 'user_id',
+//       foreignField: '_id',
+//       as: 'user'
+//     }
+//   }
+// ])
+
+// Obtiene solo las ordenes de un usuario(Id)
+// db.orders.aggregate([
+//   {
+//     $match: {
+//       _id: ObjectId('63dc5f4ad9dbf4f7eb40655c')
+//     }
+//   },
+//   {
+//     $lookup: {
+//       from: 'users',
+//       localField: 'user_id',
+//       foreignField: '_id',
+//       as: 'user',
+//     }
+//   }
+// ])
+
+
+
+// muestra todas las ordenes de un usuario
+//omitiendo la 'password', y el 'user_id' de referencia de cada orden
+db.users.aggregate([
+  {
+    $match: {
+      _id: ObjectId('63dc480941d8383c5926809e')
+    }
+  },
+  {    
+    /**
+     * from: The target collection.
+     * localField: The local join field.
+     * foreignField: The target join field.
+     * as: The name for the results.
+     * pipeline: Optional pipeline to run on the foreign collection.
+     * let: Optional variables to use in the pipeline field stages.
+     */
+    $lookup: {
+      from: 'orders',
+      localField: '_id',
+      foreignField: 'user_id',
+      as: 'orders_list',
+      pipeline: [ //Aqui podemos hacer operaciones para la colección secundaria
+        {
+          /**
+           * specifications: The fields to
+           *   include or exclude.
+           */
+          $project: {
+            'user_id': 0, // de la colección [orders]
+          }
+        }
+      ],
+    }
+  },
+  {
+    /**
+     * specifications: The fields to
+     *   include or exclude.
+     */
+    $project: {
+      'password': 0, //de la colección [users]
+    }
+  }
+])
+
+
+
+
+

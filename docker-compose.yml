@@ -1,0 +1,16 @@
+#version del servicio de yamel. y no de docker
+version: '3.9'
+
+services:
+  #nombre del sevicio, puede ser cualquier nombre 
+  mongodb:
+    image: mongo:5.0
+    restart: always
+    container_name: mongo
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=usuario
+      - MONGO_INITDB_ROOT_PASSWORD=contrasena
+    volumes:
+      - ./mongo_data:/data/db

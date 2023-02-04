@@ -1,0 +1,42 @@
+use("platzi_store")
+
+db.createCollection('users', {
+  validator: {
+    $jsonSchema: {
+      bsonType: 'object',
+      required: ['email','password','role'],
+      additionalProperties: true, //viene true por defecto, no es necesario adicionar
+      // additionalProperties: false, //desactiva la creación de campos dinamicamente
+      properties: {
+        _id:{  // este campo es obligatorio si se adiciona [additionalProperties: false]
+        // por que mongodb adiciona dinamicamente un [_id], por nosotros
+          bsonType:'objectId',
+        },
+        name: {
+          bsonType:'string'
+        },
+        last_name: {
+          bsonType: 'string'
+        },
+        email: {
+          bsonType: 'string'
+        },
+        password: {
+          bsonType: 'string',
+          pattern: '^[a-zA-z0-9]{8,100}$'
+        },
+        age:{
+          bsonType:'number',
+          minimum: 18,
+          maximum: 99
+        },
+        isSingle: {
+          bsonType: 'bool'
+        },
+        role: {
+          enum: ['customer','seller','admin']
+        }
+      }
+    }
+  }
+})

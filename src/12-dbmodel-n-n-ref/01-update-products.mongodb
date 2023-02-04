@@ -1,0 +1,21 @@
+use("platzi_store")
+
+
+// 63dc0e104f28929c36ef9b6d product
+// 63dd82ae3a345676fe2b4ed3 store
+
+
+db.products.updateOne(
+  {
+    _id: ObjectId('63dc0e104f28929c36ef9b6d')
+  },
+  {
+    $set: {
+      stores_id:[
+        ObjectId('63dd82ae3a345676fe2b4ed3')
+      ]
+    }
+  }
+)
+
+db.products.find()

@@ -1,0 +1,5 @@
+// show databases;
+use('sample_weatherdata')
+// db.getCollectionInfos()
+db.data.find().limit(2)
+

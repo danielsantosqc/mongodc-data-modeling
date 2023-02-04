@@ -1,0 +1,49 @@
+use("platzi_store")
+
+// db.stores_details.find()
+// db.users.find()
+
+// db.stores.findOne({
+//   storeId:'ST001'
+// })
+
+db.stores_details.findOne({
+  storeId:'ST001'
+})
+
+// consulta tipo JOIN
+db.stores.aggregate([
+  {
+    /**
+     * from: The target collection.
+     * localField: The local join field.
+     * foreignField: The target join field.
+     * as: The name for the results.
+     * pipeline: Optional pipeline to run on the foreign collection.
+     * let: Optional variables to use in the pipeline field stages.
+     */
+    $lookup: {
+      from: 'stores_details',
+      localField: 'storeId',
+      foreignField: 'storeId',
+      as: 'detail'
+    }
+  },
+  {
+  // {/**
+  //  * path: Path to the array field.
+  //  * includeArrayIndex: Optional name for index.
+  //  * preserveNullAndEmptyArrays: Optional
+  //  *   toggle to unwind null and empty values.
+  //  */
+  // // $unwind: {
+  // //   path: '$detail',
+  // //   includeArrayIndex: 'string',
+  // //   preserveNullAndEmptyArrays: false
+  // // }
+   
+   $unwind: '$detail'
+  }
+])
+
+

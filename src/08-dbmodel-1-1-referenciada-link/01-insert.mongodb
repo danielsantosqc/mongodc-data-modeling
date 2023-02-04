@@ -1,0 +1,18 @@
+use("platzi_store")
+
+db .stores.insertOne({
+  storeId: 'ST001',
+  name: 'Danny Store',
+  address: 'Cr 234',
+})
+
+db.stores_details.insertOne({
+  storeId: 'ST001',
+  description: 'texto texto texto',
+  manager: {
+    email: 'danny@gmail.com',
+    cellphone: '1234545'
+  }
+})
+
+// db.stores.find()

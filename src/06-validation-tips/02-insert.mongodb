@@ -1,0 +1,9 @@
+use("platzi_store")
+  db .users.insertOne({
+  password: 'asdadccscsdsc',
+  email:"email@.cin",
+  role:'admin',
+  // social_accounts: ['twitter','Facebook']
+})
+
+db.users.find()

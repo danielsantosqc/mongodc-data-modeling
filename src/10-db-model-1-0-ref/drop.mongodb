@@ -1,0 +1,12 @@
+use("platzi_store")
+  db.stores.drop()
+  db.stores_details.drop()
+
+
+
+
+
+
+
+
+
